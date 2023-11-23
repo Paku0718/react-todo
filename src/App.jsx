@@ -4,15 +4,26 @@ function App() {
   const [todo, setTodo] = useState("");
   const [todoList, setTodoList] = useState([]);
 
-  // handleForm = (e) => {
-  //   e.parenDefault();
-  // };
+  const handleForm = (e) => {
+    e.preventDefault();
+    setTodoList([...todoList, { todoName: todo }]);
+    setTodo("");
+  };
+
+  const deleteTodo = (deleteValue) => {
+    const restTodoList = [
+      ...todoList.filter((val) => {
+        return val.todoName != deleteValue;
+      }),
+    ];
+    setTodoList(restTodoList);
+  };
 
   return (
     <div className="bg-gray-200 w-full h-screen flex items-center">
       <div className="w-[500px] mx-auto text-center bg-white p-5 ">
         <h1 className="text-5xl font-bold mb-8">Todo List</h1>
-        <form action="">
+        <form onSubmit={handleForm}>
           <input
             className="border-2 placeholder:text-gray-500 rounded-lg border-black w-full p-5 mb-5 text-black"
             type="text"
@@ -29,10 +40,22 @@ function App() {
         </form>
         <div className="todo-show-area">
           <ul>
-            <li className="bg-black flex justify-between text-white py-5 rounded-lg text-2xl px-5">
-              Single Todo{" "}
-              <span className="text-red-600 cursor-pointer ">x</span>
-            </li>
+            {todoList.map((singleTodo, index) => {
+              return (
+                <li
+                  key={index}
+                  className="bg-black flex justify-between text-white py-5 rounded-lg text-2xl px-5 mb-5"
+                >
+                  {singleTodo.todoName}{" "}
+                  <span
+                    onClick={() => deleteTodo(singleTodo.todoName)}
+                    className="text-red-600 cursor-pointer "
+                  >
+                    x
+                  </span>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
