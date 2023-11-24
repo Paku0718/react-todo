@@ -20,8 +20,8 @@ function App() {
   };
 
   return (
-    <div className="bg-gray-200 w-full h-screen flex items-center">
-      <div className="w-[500px] mx-auto text-center bg-white p-5 ">
+    <div className="bg-primaryBg-dark w-full h-screen flex items-center">
+      <div className="w-[500px] mx-auto text-center bg-white p-5 rounded-lg">
         <h1 className="text-5xl font-bold mb-8">Todo List</h1>
         <form onSubmit={handleForm}>
           <input
